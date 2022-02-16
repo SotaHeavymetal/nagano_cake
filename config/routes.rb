@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :customers
+  root to: 'homes#top'
 
   namespace :admin do
     root to: 'homes#top'
@@ -10,8 +11,10 @@ Rails.application.routes.draw do
     resources :orders, only: [:show]
     resources :order_detatils, only: [:update]
 
+  end
+
   namespace :public do
-    root to: 'homes#top'
+    
     get 'home/about'=>'homes#about'
     resources :items, only: [:index, :show]
     resources :registrations, only: [:new, :create]
@@ -23,7 +26,7 @@ Rails.application.routes.draw do
 
   end
   end
-  end
+
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

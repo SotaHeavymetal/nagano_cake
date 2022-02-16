@@ -10,10 +10,11 @@
   </thead>
 
   <tbody>
+    <th>ジャンル</th>
     <% @genre.each do |genre| %>
       <tr>
         <td><%= genre.name %></td>
-        <td><%= link_to "編集する", edit_genre_path(genre) %></td>
+        <td><%= link_to "編集する", edit_admins_genre_path(genre) %></td>
       </tr>
       <% end %>
   </tbody>
