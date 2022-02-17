@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   devise_for :customers
   root to: 'homes#top'
+  get 'home/about'=>'homes#about'
 
   namespace :admin do
-    root to: 'homes#top'
     resources :items, except: [:destroy]
     resources :sessions, only: [:new, :create, :destroy]
     resources :genres, only: [:index, :create, :edit, :update]
@@ -13,9 +13,7 @@ Rails.application.routes.draw do
 
   end
 
-  namespace :public do
-    
-    get 'home/about'=>'homes#about'
+  scope module: :public do
     resources :items, only: [:index, :show]
     resources :registrations, only: [:new, :create]
     resources :sessions, only: [:new, :create, :destroy]
