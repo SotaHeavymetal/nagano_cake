@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  devise_for :admins
   devise_for :customers
   root to: 'homes#top'
   get 'home/about'=>'homes#about'
+  
+  
 
   namespace :admin do
     resources :items, except: [:destroy]
