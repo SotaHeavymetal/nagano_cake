@@ -1,27 +1,26 @@
 class Admin::ItemsController < ApplicationController
 
   def index
-    @item = Book.new
-    @items = Book.all
+    # @items = Item.page(params[:page].per(10))
+    @item = Item.new
+    @items = Item.all
   end
 
   def new
-    @item = Book.new
+    @item = Item.new
   end
 
   def create
     @item = Item.new(item_params)
     if @item.save
-      redirect_to item_path(@item)
+      redirect_to admin_items_path(@item)
     else
-      @items = Item.all
-      render "items/show"
+      redirect_to new_admin_item_path
     end
   end
 
   def show
     @item = Item.find(params[:id])
-    @items = Item.new
   end
 
   def edit
@@ -31,7 +30,7 @@ class Admin::ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
    if @item.update(item_params)
-    redirect_to item_path(@item)
+    redirect_to admin_item_path(@item)
    else
     render "edit"
    end
@@ -39,6 +38,6 @@ class Admin::ItemsController < ApplicationController
 
   private
   def item_params
-    params.require(:item).permit(:title, :body, :profile_image)
+    params.require(:item).permit(:name, :image_id, :introduction, :price, :created_at, :updated_at)
   end
 end

@@ -1,14 +1,23 @@
 Rails.application.routes.draw do
-  devise_for :admins
-  devise_for :customers
-  root to: 'homes#top'
-  get 'home/about'=>'homes#about'
-  
-  
+
+  # devise_for :admins
+    # root to: 'homes#top'
+    # get 'home/about'=>'homes#about'
+
+  devise_for :admins, controllers: {
+    sessions: 'admins/sessions',
+    passwords: 'admins/passwords',
+    registrations: 'admin/registrations'
+  }
+
+  devise_for :customers, controllers: {
+    sessions: 'public/sessions',
+    passwords: 'public/passwords',
+    registrations: 'public/registrations'
+  }
 
   namespace :admin do
     resources :items, except: [:destroy]
-    resources :sessions, only: [:new, :create, :destroy]
     resources :genres, only: [:index, :create, :edit, :update]
     resources :customers, only: [:index, :show, :edit, :update]
     resources :orders, only: [:show]
@@ -17,9 +26,9 @@ Rails.application.routes.draw do
   end
 
   scope module: :public do
+    root 'homes#top'
+    get '/about'=>'homes#about'
     resources :items, only: [:index, :show]
-    resources :registrations, only: [:new, :create]
-    resources :sessions, only: [:new, :create, :destroy]
     resources :customers, only: [:edit, :update, :unsubscribe, :withdraw]
     resources :cart_items, only: [:index, :update, :destroy, :destroy_all, :create]
     resources :orders, only: [:new, :confirm, :complete, :create, :index, :show]

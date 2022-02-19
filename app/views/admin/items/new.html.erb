@@ -1,0 +1,22 @@
+<h2>商品新規登録</h2>
+
+<table class = "table table-hover text-center">
+  <thead>
+    <tr>
+  
+<%= form_with model:@item, url: admin_items_path, local:true do |f| %>
+<th><%= f.label :商品画像 %>
+<%= f.attachment_field :image %></th>
+
+<th><%= f.label :商品名 %>
+<%= f.text_field :name %></th>
+
+<th><%= f.label :商品説明 %>
+<%= f.text_area :introduction %></th>
+
+<th><%= f.label :税抜価格 %>
+<%= f.text_field :price %></th>
+
+<th><%= f.submit :新規登録, class: "btn btn-success" %></th>
+</table>
+<% end %>
