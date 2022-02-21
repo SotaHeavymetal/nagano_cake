@@ -1,0 +1,46 @@
+<div class = "container my-5">
+ <div class = "row">
+  <h2><%= @customer.first_name %><%= @customer.last_name %>さんの会員情報編集</h2>
+ </div>
+
+  <div class = "row mt-3">
+   <div class = "offset-sm-1 col-sm-7">
+    <table class = "table table-borderless">
+     <tbody>
+      <td><%= form_with model:@customer, url: admin_customers_path, method: :get, local:true do |f| %>
+       <tr>
+        <td><%= f.label :会員ID %></td>
+        <td><%= f.label @customer.id %></td>
+       </tr>
+       <tr>
+        <td><%= f.label :氏名 %></td>
+        <td><%= f.text_field :last_name %><%= f.text_field :first_name %></td>
+       </tr>
+       <tr>
+        <td><%= f.label :フリガナ %></td>
+        <td><%= f.text_field :last_name_kana %><%= f.text_field :first_name_kana %></td>
+       </tr>
+       <tr>
+        <td><%= f.label :郵便番号 %></td>
+        <td><%= f.text_field :postal_code %></td>
+       </tr>
+       <tr>
+        <td><%= f.label :住所 %></td>
+        <td><%= f.text_field :address %></td>
+       </tr>
+       <tr>
+        <td><%= f.label :電話番号 %></td>
+        <td><%= f.text_field :telephone_number %></td>
+       </tr>
+       <tr>
+        <td><%= f.label :メールアドレス %></td>
+        <td><%= f.email_field :email %></td>
+       </tr>
+      </tbody>
+      </div>
+      </div>
+</table>
+     <%= f.submit "変更を保存", class: "btn btn-success" %>
+     <% end %>
+
+    </div>

@@ -1,17 +1,16 @@
-<divclass = "container my-5">
-  <divclass = "row">
+<div class = "container my-5">
+  <div class = "row">
     <h2><%= @customer.first_name %><%= @customer.last_name %>さんの会員詳細</h2>
   </div>
 
-  <divclass = "row mt-3">
-    <divclass = "offset-sm-1 col-sm-7">
-      <tableclass = "table table-borderless">
+  <div class = "row mt-3">
+    <div class = "offset-sm-1 col-sm-7">
+      <table class = "table table-borderless">
         <tbody>
           <tr>
             <td>会員ID</td>
             <td><%= @customer.id %>
                 </div>
-              <% end %>
             </div>
             </td>
           </tr>
@@ -44,13 +43,13 @@
             <td>メールアドレス</td>
             <td><%= @customer.email %></td>
           </tr>
+
+      <td><%=link_to "編集する", edit_admin_customer_path, class: "btn btn-success" %></td>
+      <td><%=link_to "注文履歴一覧を見る", admin_customers_path, class: "btn btn-primary mt-5" %></td>
         </tbody>
       </table>
     </div>
 
-    <divclass = "col-sm-3 my-auto">
-      <%=link_to "編集する", edit_admin_customer_path, class: "btn btn-success" %>
-      <%=link_to "注文履歴一覧を見る", admin_customer_orders_path, class: "btn btn-primary mt-5" %>
-    </div>
+
   </div>
 </div>
