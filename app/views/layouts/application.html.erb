@@ -30,6 +30,24 @@
     <li class = "nav-item">
     <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: "nav-link" %>
     </li>
+     <% else %>
+     <ul class = "navbar-nav ml-auto">
+    <li class = "nav-item">
+      <%= link_to 'About', admin_items_path, class: 'nav-link' %>
+    </li>
+     <li class = "nav-item">
+       <%= link_to '商品一覧', admin_customers_path, class: "nav-link" %>
+     </li>
+     <!--<li class = "nav-item">-->
+       <!--<%# link_to "注文履歴一覧", admin_orders_path, class: "nav-link" %>-->
+     <!--</li>-->
+     <li class = "nav-item">
+       <%= link_to "新規登録", admin_genres_path, class: "nav-link" %>
+     </li>
+    <li class = "nav-item">
+    <%= link_to 'ログイン', destroy_admin_session_path, method: :delete, class: "nav-link" %>
+    </li>
+
   <% end %>
     <%= yield %>
     </header>
