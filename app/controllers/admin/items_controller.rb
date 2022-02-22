@@ -1,6 +1,5 @@
 class Admin::ItemsController < ApplicationController
-
-before_action
+  
   def index
     # @items = Item.page(params[:page].per(10))
     @item = Item.new

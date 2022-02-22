@@ -1,0 +1,27 @@
+<h2>マイページ</h2>
+
+<table>
+<tbody>
+  <%= form_with model:@customer, url: admin_customers_path, method: :get, local:true do |f| %>
+    <tr>
+     <td><%= f.label :氏名 %></td>
+     <td><%= @customer.first_name + @customer.last_name %></td>
+     </tr>
+
+     <tr>
+       <td><%= f.label :カナ %></td>
+     <td><%=f.label @customer.first_name_kana + @customer.last_name_kana %></td>
+    </tr>
+
+    <tr>
+      <td><%= f.label :郵便番号 %></td>
+      <td><%= f.label @customer.postal_code %></td>
+      </tr>
+
+      <td><%= @customer.address %></td>
+      <td><%= @customer.telephone_number %></td>
+      <td><%= @customer.email %></td>
+    </tr>
+    <% end %>
+  </tbody>
+  </table>
