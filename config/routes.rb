@@ -5,10 +5,9 @@ Rails.application.routes.draw do
     registrations: 'admin/registrations'
   }
 
-  devise_for :customers, controllers: {
-    sessions: 'public/sessions',
-    passwords: 'public/passwords',
-    registrations: 'public/registrations'
+  devise_for :customers,skip: [:passwords,], controllers: {
+   sessions:      'public/sessions',
+   registrations: 'public/registrations'
   }
 
   namespace :admin do
@@ -24,10 +23,11 @@ Rails.application.routes.draw do
     root 'homes#top'
     get '/about'=>'homes#about'
     resources :items, only: [:index, :show]
-    get 'customers/my_page'=>'customers#show'
+    get 'customers/my_page' => 'customers#show', as: :mypage
     get 'customers/unsubscribe'=>'customers#unsubscribe'
     get 'customers/withdraw'=>'customers#withdraw'
-    resources :customers, only: [:edit, :update]
+    get 'customers/edit'=>'customers#edit'
+    patch 'customers/update'=>'customers#update'
     resources :cart_items, only: [:index, :update, :destroy, :destroy_all, :create]
     resources :orders, only: [:new, :confirm, :complete, :create, :index, :show]
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]

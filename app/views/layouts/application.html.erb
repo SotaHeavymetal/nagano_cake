@@ -30,7 +30,22 @@
     <li class = "nav-item">
     <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: "nav-link" %>
     </li>
-    
+
+    <% elsif customer_signed_in? %>
+  <ul class = "navbar-nav ml-auto">
+        <li class = "nav-item">
+      <%= link_to 'マイページ', mypage_path, class: 'nav-link' %>
+    </li>
+     <li class = "nav-item">
+       <%= link_to '商品一覧', items_path, class: "nav-link" %>
+     </li>
+     <li class = "nav-item">
+       <%= link_to "カート", cart_items_path, class: "nav-link" %>
+     </li>
+    <li class = "nav-item">
+    <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: "nav-link" %>
+    </li>
+
      <% else %>
      <ul class = "navbar-nav ml-auto">
     <li class = "nav-item">
@@ -48,8 +63,8 @@
     <li class = "nav-item">
     <%= link_to 'ログイン', new_customer_session_path, class: "nav-link" %>
     </li>
-
   <% end %>
+
     <%= yield %>
     </header>
   </body>

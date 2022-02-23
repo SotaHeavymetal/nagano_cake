@@ -2,14 +2,13 @@
   <div class = "row">
 <h2>新規会員登録</h2>
 </div>
+
 <div class = "row mt-3">
-  <div class = "offset-sm-1 col-sm-7">
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
-
-<table class = "table table-borderless">
+  <div class = "offset-sm-1 col-sm-10">
+    <table class = "table table-borderless">
 <tbody>
+<%= form_with model: resource, url: customer_registration_path, local: true do |f| %>
+  <%= render "public/shared/error_messages", resource: resource %>
   <tr>
    <td><%= f.label :名前 %></td>
    <td><%= f.text_field :last_name, placeholder:"令和" %></td>
@@ -17,14 +16,12 @@
    <td><%= f.text_field :last_name_kana, placeholder:"レイワ" %></td>
    <td><%= f.text_field :first_name_kana, placeholder:"ミチコ" %></td>
   </tr>
-
   <tr>
   <div class="field">
     <td><%= f.label :email %><br /></td>
     <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
   </div>
   </tr>
-
   <tr>
   <td><%= f.label :郵便番号 %></td>
   <td><%= f.text_field :postal_code, placeholder:"0000000" %></td>
@@ -33,32 +30,29 @@
   <td><%= f.label :住所 %></td>
   <td><%= f.text_field :address, placeholder:"東京都渋谷区代々木神園町0-0" %></td>
   </tr>
-
   <tr>
   <td><%= f.label :電話番号 %></td>
   <td><%= f.text_field :telephone_number, placeholder:"0000000000" %></td>
 </tr>
   <tr>
-  <tr><div class = "field">
+  <tr>
+    <div class = "field">
     <td><%= f.label :"パスワード(６文字以上)" %></td>
     <td><% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em></td></tr>
+    <em>(<%= @minimum_password_length %> characters minimum)</em></td>
     <% end %><br />
     <td><%= f.password_field :password, autocomplete: "new-password" %></td>
-  </div></tr>
-
+  </div>
+  </tr>
   <tr><div class="field">
     <td><%= f.label :パスワード（確認用） %><br /></td>
     <td><%= f.password_field :password_confirmation, autocomplete: "new-password" %></td>
   </div></tr>
-
   <td><div class="actions">
     <%= f.submit "新規登録" %>
   </div></td>
 <% end %>
-
 <%= render "public/shared/links" %>
-
 </td>
 </table>
 
