@@ -8,7 +8,7 @@
     <div class = "offset-sm-1 col-sm-10">
       <table class = "table table-borderless">
        <tbody>
-        <%= form_for(resource, as: resource_name, url: customers_my_page_path(resource_name)) do |f| %>
+        <%= form_with model: resource, url: customer_registration_path, local: true do |f| %>
 
          <tr><div class="field">
           <td><%= f.label :メールアドレス %><br /></td>
