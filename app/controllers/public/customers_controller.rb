@@ -10,9 +10,10 @@ class Public::CustomersController < ApplicationController
   end
 
   def update
-    if @customer = Customer.find(params[:id])
-       @customer.update(customer_params)
-       redirect_to customers_my_page_path
+    @customer = Customer.find(params[:id])
+    if @customer.update(customer_params)
+      flash[:notice] = "正しく保存できました。"
+    redirect_to customers_my_page_path
     else
        flash[:notice] = "正しく保存できませんでした。"
        render "edit"
@@ -20,13 +21,14 @@ class Public::CustomersController < ApplicationController
   end
 
   def unsubscribe
-    @user = Customer.find_by(name: params[:name])
+    @customer = Customer.find(params[:id])
   end
 
   def withdraw
-    @customer = Customer.find_by(name: params[:name])
-    @customer.update(is_valid: false)
-    reset_session
+    @customer = Customer.find(params[:id])
+    if @customer.update(is_valid: false)
+    sign_out current_customer
+    end
     redirect_to root_path
   end
 
@@ -34,4 +36,12 @@ class Public::CustomersController < ApplicationController
  def customer_params
    params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :email, :encrypted_password, :postal_code, :address, :telephone_number)
  end
+ 
+# def ensure_correct_customer
+#   @customer = Customer.find(params[:id])
+#   if current_customer.id = @customer.id
+#     redirect_to root_path
+#   end
+# end
+ 
 end
