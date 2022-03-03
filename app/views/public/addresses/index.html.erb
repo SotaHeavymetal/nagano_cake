@@ -4,7 +4,7 @@
    <div class = "offset-sm-2">
 <table class = "table" border = "0">
 <tbody>
-<%= form_with model:@address, url: addresses_path, local:true do |f| %>
+<%= form_with model:@address, url: addresses_path, method: :post do |f| %>
 <tr>
 <td><%= f.label :郵便番号（ハイフンなし） %></td>
 <td><%= f.text_field :postal_code %></td>
@@ -39,23 +39,19 @@
       <th></th>
      </tr>
      </thead>
-     
+
    <tbody>
-    <% @address.each do |address| %>
+    <% @addresses.each do |address| %>
      <tr>
       <td><%= address.postal_code %></td>
       <td><%= address.address %></td>
       <td><%= address.name %></td>
-      <td><%= f.submit :編集する, class: "btn btn-success" %></td>
-      <td><%= f.submit :削除する, class: "btn btn-danger" %></td>
+      <td><%= link_to "編集する", edit_address_path(address), class: "btn btn-success" %></td>
+      <td><%= link_to "削除する", addresses_path, method: :delete, class: "btn btn-danger" %></td>
      </tr>
      <% end %>
      </tbody>
      </table>
-     </tr>
-     </tr>
-     </thead>
-     </table>
      </div>
-     
+
 

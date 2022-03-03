@@ -1,7 +1,7 @@
 <h2>会員情報編集</h2>
 
 <table class = "table table-borderless">
-<%= form_with model:@customer, url: customers_my_page_path, local:true do |f| %>
+<%= form_with model:@customer, url: customers_update_path, local:true do |f| %>
  <tr>
  <td><%= f.label :氏名 %></td>
  <td><%= f.text_field :first_name %></td>

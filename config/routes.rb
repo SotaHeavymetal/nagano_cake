@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     registrations: 'admin/registrations'
   }
 
-  devise_for :customers,skip: [:passwords,], controllers: {
+  devise_for :customers,skip: [:passwords], controllers: {
    sessions:      'public/sessions',
    registrations: 'public/registrations'
   }
@@ -22,13 +22,15 @@ Rails.application.routes.draw do
   scope module: :public do
     root 'homes#top'
     get '/about'=>'homes#about'
+    get '/thanks'=>'homes#thanks'
     resources :items, only: [:index, :show]
     get 'customers/my_page' => 'customers#show', as: :mypage
     get 'customers/unsubscribe'=>'customers#unsubscribe'
     get 'customers/withdraw'=>'customers#withdraw'
-    get 'customers/edit/:id'=>'customers#edit'
+    get 'publics/edit'=>'customers#edit'
     patch 'customers/update'=>'customers#update'
-    resources :cart_items, only: [:index, :update, :destroy, :destroy_all, :create]
+    delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
+    resources :cart_items, only: [:index, :update, :destroy, :create]
     resources :orders, only: [:new, :confirm, :complete, :create, :index, :show]
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
 

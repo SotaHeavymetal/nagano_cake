@@ -2,18 +2,20 @@ class Public::CustomersController < ApplicationController
   before_action :authenticate_customer!
 
   def show
+    #@customer = current_customer
     @customer = Customer.find(current_customer.id)
   end
 
   def edit
-    @customer = Customer.find(params[:id])
+    #@customer = current_customer
+    @customer = Customer.find(current_customer.id)
   end
 
   def update
-    @customer = Customer.find(params[:id])
+    @customer = Customer.find(current_customer.id)
     if @customer.update(customer_params)
       flash[:notice] = "正しく保存できました。"
-    redirect_to customers_my_page_path
+    redirect_to mypage_path
     else
        flash[:notice] = "正しく保存できませんでした。"
        render "edit"
@@ -21,27 +23,31 @@ class Public::CustomersController < ApplicationController
   end
 
   def unsubscribe
-    @customer = Customer.find(params[:id])
+    @customer = Customer.find(current_customer.id)
   end
 
   def withdraw
-    @customer = Customer.find(params[:id])
+    @customer = Customer.find(current_customer.id)
     if @customer.update(is_valid: false)
-    sign_out current_customer
+      reset_session
+      flash[:notice] = "退会処理を実行いたしました"
+      redirect_to root_path
+    # sign_out current_customer
     end
-    redirect_to root_path
   end
+
+  
 
   private
  def customer_params
    params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :email, :encrypted_password, :postal_code, :address, :telephone_number)
  end
- 
+
 # def ensure_correct_customer
 #   @customer = Customer.find(params[:id])
 #   if current_customer.id = @customer.id
 #     redirect_to root_path
 #   end
 # end
- 
+
 end

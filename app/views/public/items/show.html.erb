@@ -1,0 +1,32 @@
+<div class = "container my-5">
+
+<div class = "row">
+ <div class = "offset-sm-1 col-sm-1">
+ <%= attachment_image_tag @item, :image, :fill, 200, 200, fallback: 'no_image.jpeg' %>
+  </div>
+  <div class = "row col-5">
+     <strong><%= @item.name %></strong>
+     </div>
+     <div class = "row mt-4">
+     <%= @item.introduction %>
+     </div>
+     <div class = "row">
+     ¥<%= @item.price %>円
+     </div>
+  </div>
+      <div class="offset-1">
+
+        <div class="row">
+          <%= form_with model:@cart_item, url:cart_items_path do |f| %>
+            <%= f.number_field :quantity, min:1, placeholder: "個数選択" %>
+            <%= f.hidden_field :item_id, :value => @item.id %>
+            <%= f.submit "カートに入れる", class: "btn btn-success" %>
+      　　<% end %>
+        </div>
+
+<!--<div class = "row">-->
+  <!--<div clas = "offset-sm-9 col-sm-2">-->
+<%#= link_to "カートに入れる", cart_items_path(@item), class: "btn btn-success" %>
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
