@@ -1,6 +1,6 @@
 <h5>配送先登録/一覧</h5>
 
-<div class = "row my-5">
+<div class = "row md-5">
    <div class = "offset-sm-2">
 <table class = "table" border = "0">
 <tbody>
@@ -47,7 +47,7 @@
       <td><%= address.address %></td>
       <td><%= address.name %></td>
       <td><%= link_to "編集する", edit_address_path(address), class: "btn btn-success" %></td>
-      <td><%= link_to "削除する", addresses_path, method: :delete, class: "btn btn-danger" %></td>
+      <td><%= link_to "削除する", address_path(address), method: :delete, class: "btn btn-danger" %></td>
      </tr>
      <% end %>
      </tbody>

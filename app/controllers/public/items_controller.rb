@@ -1,13 +1,17 @@
 class Public::ItemsController < ApplicationController
 
   def index
-    @item = Item.new
     @items = Item.all
-    @items_page = Item.page(params[:page]).per(8)
+     @items = Item.page(params[:page]).per(8)
   end
 
   def show
-    @cart_item = CartItem.new
     @item = Item.find(params[:id])
+    @cart_item = CartItem.new
   end
+
+    private
+def item_params
+    params.require(:cart_item).permit(:customer_id, :item_id, :amount)
+end
 end

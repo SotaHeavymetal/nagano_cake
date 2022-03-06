@@ -1,0 +1,71 @@
+<div class ="container md-5">
+ <div class = "row">
+  <div class = "offset-1">
+   <h3>ショッピングカート</h3>
+  </div>
+
+  <div class = "ml-auto">
+   <%= link_to "カートを空にする", cart_items_path, method: :delete, class: "btn btn-danger" %>
+  </div>
+ </div>
+
+    <div class ="row>">
+     <div class = "col-9">
+      <table border = "1" class = "table">
+       <thead>
+        <tr>
+         <th>商品名</th>
+         <th>単価（税込）</th>
+         <th>数量</th>
+         <th>小計</th>
+         <th></th>
+        </tr>
+       </thead>
+
+        <% @cart_items.each do |cart_item| %>
+        <% @total = @total+ cart_item.subtotal %>
+        <% @total += cart_item.subtotal %>
+         <tbody>
+          <tr>
+           <td>
+            <%= attachment_image_tag @item, :image, :fill, 200, 200, fallback: 'no_image.jpeg' %>
+             <span><%= cart_item.item.name %></span>
+           </td>
+          　<td><%= cart_item.item.with_tax_price %></td>
+            <td>
+            　<%= form_with model: cart_item, url: cart_item_path(cart_item.id) do |f| %>
+              <%= f.submit "変更", class: "btn btn-success" %>
+              <%= f.select :amount, *[1..10] %>
+          　</td>
+            　<% end %>
+            <td><%= cart_item.subtotal %></td>
+            <td><%= link_to "削除する", cart_items_destroy_all_path(cart_item), method: :delete, class: "btn btn-danger" %></td>
+           </tr>
+          </tbody>
+          <% end %>
+         </table>
+      </div>
+     </div>
+
+    <div class = "row">
+      <div class= "offset-2 col-3">
+        <%= link_to "買い物を続ける", items_path, class: "btn btn-primary" %>
+      </div>
+
+      <div class = "offset-8">
+        <table border = "1" class = "table">
+          <tr>
+         <td>合計金額</td>
+         <td>¥<%= @total %></td>
+         </tr>
+        </div>
+       </table>
+      </div>
+     </div>
+
+      <div class = "row">
+      <div　class = "col-md-7">
+        <%= link_to "情報入力に進む", new_order_path(@cart_items), class: "btn btn-success" %>
+      </div>
+    </div>
+</div>

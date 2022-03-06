@@ -1,0 +1,27 @@
+<div class = "container md-8">
+  <div class = "row">
+    <div class = "offset-2">
+      <h2>注文情報入力</h2>
+    </div>
+
+    <div class = "row md-2">
+      <div class = "col-4">
+
+        <div class ="row">
+          <strong>支払方法</strong>
+        </div>
+        <div>
+        <%= form_with model: @cart_items, url: orders_path do |cart_item| %>
+        <%= f.radio_button :payment_method, "credit_card" %>
+        <%= f.label :payment_method, "クレジットカード" %>
+        <%= f.radio_button :payment_method, "transfer" %>
+        <%= f.label :payment_method, "銀行振込" %>
+      </div>
+<% end %>
+      <div class = "row">
+        <strong>お届け先</strong>
+        <%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :full_address) %>
+      </div>
+    </div>
+  </div>
+</div>
