@@ -31,7 +31,7 @@ Rails.application.routes.draw do
     patch 'customers/update'=>'customers#update'
     delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
     resources :cart_items, only: [:index, :update, :destroy, :create]
-    post 'orders/confirmorders_confirm_path' => 'orders/confirm'
+    post 'orders/confirm' => 'orders/confirm'
     get 'order/complete' => 'orders/complete'
     resources :orders, only: [:new, :create, :index, :show]
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]

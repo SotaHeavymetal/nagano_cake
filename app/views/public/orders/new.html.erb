@@ -1,27 +1,56 @@
-<div class = "container md-8">
+<div class = "container md-10">
   <div class = "row">
-    <div class = "offset-2">
+    <div class = "offset-1">
       <h2>注文情報入力</h2>
     </div>
 
-    <div class = "row md-2">
-      <div class = "col-4">
+    <div class = "row">
+      <div class = "col-10">
 
         <div class ="row">
           <strong>支払方法</strong>
         </div>
         <div>
-        <%= form_with model: @cart_items, url: orders_path do |cart_item| %>
-        <%= f.radio_button :payment_method, "credit_card" %>
-        <%= f.label :payment_method, "クレジットカード" %>
-        <%= f.radio_button :payment_method, "transfer" %>
-        <%= f.label :payment_method, "銀行振込" %>
+        <%= form_with model: @cart_items, url: orders_path do |f| %>
+        <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
+        <%= f.label :payment_method, Order.payment_methods_i18n[:credit_card] %>
+        <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
+        <%= f.label :payment_method, Order.payment_methods_i18n[:transfer]%>
       </div>
-<% end %>
+
       <div class = "row">
+
         <strong>お届け先</strong>
+        <%= f.radio_button :select_address, Order.select_addresses.key(0) %>
+        <%= f.label :select_address, Order.select_addresses_i18n[:my_address] %>
+        <%= current_customer.postal_code + current_customer.address %></br>
+        <%= current_customer.last_name + current_customer.first_name %>
+         <%= f.radio_button :select_address, Order.select_addresses.key(1) %>
+         <%= f.label :select_address, Order.select_addresses_i18n[:registered_address] %>
         <%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :full_address) %>
       </div>
+      <% end %>
+      <table class = "table table-borderless">
+        <tbody>
+
+      <%= form_with model: @address, url: orders_confirm_path do |f| %>
+      <%= f.radio_button :select_address, Order.select_addresses.key(2) %>
+      <%= f.label :select_address, Order.select_addresses_i18n[:new_address] %>
+      <tr>
+       <td><%= f.label :郵便番号（ハイフンなし） %></td>
+       <td><%= f.text_field :postal_code %></td>
+      </tr>
+      <tr>
+       <td><%= f.label :住所 %></td>
+       <td><%= f.text_field :address %></td>
+      </tr>
+      <tr>
+       <td><%= f.label :宛名 %></td>
+       <td><%= f.text_field :name %></td>
+      </tr>
+      <tr><td>
+        <%= f.submit "確認画面へ進む", class: "btn btn-primary" %></td></tr>
+      <% end %>
     </div>
   </div>
 </div>
