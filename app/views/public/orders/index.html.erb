@@ -1,0 +1,70 @@
+<h2>aaa</h2>
+
+<div class ="container md-5">
+ <div class = "row">
+  <div class = "offset-1">
+   <h3>注文情報確認</h3>
+  </div>
+ </div>
+
+    <div class ="row>">
+     <div class = "col-9">
+      <table border = "1" class = "table">
+       <thead>
+        <tr>
+         <th>商品名</th>
+         <th>単価（税込）</th>
+         <th>数量</th>
+         <th>小計</th>
+        </tr>
+       </thead>
+
+        <% @cart_items.each do |cart_item| %>
+        <% @total = @total+ cart_item.subtotal %>
+        <% @total += cart_item.subtotal %>
+         <tbody>
+          <tr>
+           <td>
+            <%= attachment_image_tag @item, :image, :fill, 200, 200, fallback: 'no_image.jpeg' %>
+             <span><%= cart_item.item.name %></span>
+           </td>
+          　<td><%= cart_item.item.with_tax_price %></td>
+            <td>
+            　<%= form_with model: cart_item, url: cart_item_path(cart_item.id) do |f| %>
+              <%= f.label :amount %>
+          　</td>
+            　<% end %>
+            <td><%= cart_item.subtotal %></td>
+           </tr>
+          </tbody>
+          <% end %>
+         </table>
+      </div>
+     </div>
+
+    <div class = "row">
+      <div class = "offset-8">
+        <table border = "1" class = "table">
+          <tr>
+            <td>送料</td>
+            <td>800</td>
+          </tr>
+          <tr>
+         <td>商品合計</td>
+         <td>¥<%= @total %></td>
+         </tr>
+         <tr>
+           <td>請求金額</td>
+           <td><%= 800 + @total %></td>
+         </tr>
+        </div>
+       </table>
+      </div>
+     </div>
+
+      <div class = "row">
+      <div　class = "col-md-7">
+        <%= link_to "注文を確定する", new_order_path(@cart_item), class: "btn btn-success" %>
+      </div>
+    </div>
+</div>
