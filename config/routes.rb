@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :show]
     get 'customers/my_page' => 'customers#show', as: :mypage
     get 'customers/unsubscribe'=>'customers#unsubscribe'
-    get 'customers/withdraw'=>'customers#withdraw'
+    patch 'customers/withdraw'=>'customers#withdraw'
     get 'publics/edit'=>'customers#edit'
     patch 'customers/update'=>'customers#update'
     delete 'cart_items/destroy_all' => 'cart_items#destroy_all'

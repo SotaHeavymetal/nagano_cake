@@ -34,6 +34,9 @@ class Public::OrdersController < ApplicationController
 
   def create
     #@cart_items.each do |cart_item|
+    #order tableとorder_detailsにデータを保存する
+    #if文は不要
+    
       
   end
 
