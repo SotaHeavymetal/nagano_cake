@@ -33,19 +33,37 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
-    #@cart_items.each do |cart_item|
+    @order = Order.new
+    @order.customer_id = current_customer.id
+    @order.postal_code = @order.postal_code
+    @order.address = @order.address
+    @order.name = @order.name
+    @order.shipping_cost = @order.shipping_cost
+    @order.total_payment = @order.total_payment
+    @order.save
+
+    current_customer.cart_items.each do |cart_item|
+     @order_details = OrdersDetail.new
+      @order_details.order_id = @order.id
+      @order_details.item_id = @order.item.id
+      @order_details.price = @order.price
+      @order_details.save
+    end
     #order tableとorder_detailsにデータを保存する
     #if文は不要
-    
-      
+    current_customer.cart_items.destroy_all
+    redirect_to orders_complete_path
+
+
   end
 
   def index
-    @order = Order.find(params[:id])
+    @orders = Order.find(params[:id])
   end
 
   def show
     #@order = Order.find(params[:id])
+    #@order_details = @order.order_details
   end
 
   private

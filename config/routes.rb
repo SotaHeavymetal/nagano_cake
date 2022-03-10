@@ -15,8 +15,7 @@ Rails.application.routes.draw do
     resources :genres, only: [:index, :create, :edit, :update]
     resources :customers, only: [:index, :show, :edit, :update]
     resources :orders, only: [:show]
-    resources :order_detatils, only: [:update]
-
+    patch 'orders/order_id/order_detatils/:id' => 'orders#update'
   end
 
   scope module: :public do
