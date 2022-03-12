@@ -44,9 +44,10 @@ class Public::OrdersController < ApplicationController
 
     current_customer.cart_items.each do |cart_item|
      @order_details = OrdersDetail.new
-      @order_details.order_id = @order.id
-      @order_details.item_id = @order.item.id
-      @order_details.price = @order.price
+      @order_details.order_id = cart_item.id
+      @order_details.item_id = cart_item.item.id
+      @order_details.price = cart_item.price
+      @order.order_details = @order_details
       @order_details.save
     end
     #order tableとorder_detailsにデータを保存する

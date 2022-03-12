@@ -11,61 +11,69 @@
 
 <body>
   <header>
-    <h2>LOGO</h2>
+     <nav class="navbar navbar-expand-lg">
+        <div class="container">
 
+    <div class="border" style="padding:28px;">LOGO</div>
+    <ul class = "navbar-nav ml-auto">
   <% if admin_signed_in? %>
-  <ul class = "navbar-nav ml-auto">
-    <li class = "nav-item">
+    <li>
       <%= link_to '商品一覧', admin_items_path, class: 'nav-link' %>
     </li>
-     <li class = "nav-item">
+     <li>
        <%= link_to '会員一覧', admin_customers_path, class: "nav-link" %>
      </li>
-     <!--<li class = "nav-item">-->
-       <!--<%# link_to "注文履歴一覧", admin_orders_path, class: "nav-link" %>-->
-     <!--</li>-->
-     <li class = "nav-item">
+     <li>
+       <%= link_to "注文履歴一覧", admin_root_path, class: "nav-link" %>
+     </li>
+     <li>
        <%= link_to "ジャンル一覧", admin_genres_path, class: "nav-link" %>
      </li>
-    <li class = "nav-item">
+    <li>
     <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: "nav-link" %>
     </li>
 
     <% elsif customer_signed_in? %>
-  <ul class = "navbar-nav ml-auto">
-        <li class = "nav-item">
+        <li>
       <%= link_to 'マイページ', mypage_path, class: 'nav-link' %>
     </li>
-     <li class = "nav-item">
+     <li>
        <%= link_to '商品一覧', items_path, class: "nav-link" %>
      </li>
-     <li class = "nav-item">
+     <li>
        <%= link_to "カート", cart_items_path, class: "nav-link" %>
      </li>
-    <li class = "nav-item">
+    <li>
     <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: "nav-link" %>
     </li>
 
      <% else %>
-     <ul class = "navbar-nav ml-auto">
-    <li class = "nav-item">
+    <li>
       <%= link_to 'About', about_path, class: 'nav-link' %>
     </li>
-     <li class = "nav-item">
+     <li>
        <%= link_to '商品一覧', items_path, class: "nav-link" %>
      </li>
-     <!--<li class = "nav-item">-->
-       <!--<%# link_to "注文履歴一覧", admin_orders_path, class: "nav-link" %>-->
-     <!--</li>-->
-     <li class = "nav-item">
+     <li>
        <%= link_to "新規登録", new_customer_registration_path, class: "nav-link" %>
      </li>
-    <li class = "nav-item">
+    <li>
     <%= link_to 'ログイン', new_customer_session_path, class: "nav-link" %>
     </li>
   <% end %>
-
-    <%= yield %>
+    </div>
+    </div>
+    </nav>
     </header>
-  </body>
+      <%= yield %>
+
+     <footer>
+      <div class="border-top" style="padding:45px;">おいしいケーキ屋さん。
+       <div class="container">
+        <div class = "row">
+        </div>
+       </div>
+      </div>
+     </footer>
+    </body>
 </html>
