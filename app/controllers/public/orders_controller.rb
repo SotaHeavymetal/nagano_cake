@@ -26,45 +26,41 @@ class Public::OrdersController < ApplicationController
     end
     @cart_items = current_customer.cart_items
     @total = 0
-
+    @order.shipping_cost = 800
+    @cart_items.each do |cart_item|
+    @total += cart_item.subtotal
+    end
+    @order.total_payment = @order.shipping_cost + @total
   end
 
   def complete
   end
 
   def create
-    @order = Order.new
+    @order = Order.new(order_params)
     @order.customer_id = current_customer.id
-    @order.postal_code = @order.postal_code
-    @order.address = @order.address
-    @order.name = @order.name
-    @order.shipping_cost = @order.shipping_cost
-    @order.total_payment = @order.total_payment
-    @order.save
-
+    if @order.save
     current_customer.cart_items.each do |cart_item|
-     @order_details = OrdersDetail.new
-      @order_details.order_id = cart_item.id
+      @order_details = OrdersDetail.new
+      @order_details.order_id = @order.id
       @order_details.item_id = cart_item.item.id
-      @order_details.price = cart_item.price
-      @order.order_details = @order_details
+      @order_details.price = cart_item.item.price
+      @order_details.amount = cart_item.amount
+      @order_details.making_status = 0
       @order_details.save
     end
-    #order tableとorder_detailsにデータを保存する
-    #if文は不要
     current_customer.cart_items.destroy_all
+  end
     redirect_to orders_complete_path
-
-
   end
 
   def index
-    @orders = Order.find(params[:id])
+    @orders = current_customer.orders
+
   end
 
   def show
-    #@order = Order.find(params[:id])
-    #@order_details = @order.order_details
+    @orders = Order.find(params[:id])
   end
 
   private

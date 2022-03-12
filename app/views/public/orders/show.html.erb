@@ -16,17 +16,17 @@
        <tbody>
         <tr>
          <td>注文日</td>
-         <td><%= @order.created_at %></td>
+         <td><%= @orders.created_at %></td>
         </tr>
         <tr>
          <td>配送先</td>
          <td>
-          <%= "〒" + @order.postal_code + "  " + @order.address + "  " + @order.name %>
+          <%= "〒" + @orders.postal_code + "  " + @orders.address + "  " + @orders.name %>
          </td>
         </tr>
         <tr>
          <td>支払方法</td>
-         <td><%= @order.payment_method %></td>
+         <td><%= @orders.payment_method %></td>
         </tr>
        </tbody>
       </table>
@@ -43,15 +43,15 @@
          <tbody>
           <tr>
            <td>商品合計</td>
-           <td><%= @order.total %></td>
+          <td><%= @orders.total_payment - 800 %></td>
           </tr>
           <tr>
            <td>配送料</td>
-           <td><%= @order.shipping_cost %></td>
+           <td><%= @orders.shipping_cost %></td>
            </tr>
             <tr>
              <td>ご請求額</td>
-             <td><%= @order.total + @order.shipping_cost %></td>
+             <td><%= @orders.total_payment %></td>
             </tr>
            </tbody>
           </table>
@@ -76,13 +76,14 @@
           </tr>
          </thead>
 
-         <% @order_details.each do |detail| %>
+
          <tbody>
+           <% @orders.orders_details.each do |detail| %>
           <tr>
-           <td><%= detail.item_name %></td>
-           <td><%= (detail.item_price * 1.1).floor %></td>
-           <td><%= detail.amount %></td>
-           <td><%= detail.item_price * detail.amount %></td>
+           <td><%= detail.item.name %></td>
+           <td><%= detail.price %></td>
+            <td><%= detail.amount %></td>
+           <td><%= (detail.price * detail.amount * 1.1).floor %></td>
           </tr>
          </tbody>
         <% end %>

@@ -1,13 +1,11 @@
-<div class = "container md-10">
+<div class = "container my-5">
   <div class = "row">
-    <div class = "offset-1">
-      <h2>注文履歴一覧</h2>
-    </div>
-    </div>
+    <h2>注文履歴一覧</h2>
+  </div>
 
-    <div class = "row">
-      <div class = "col-10">
-        <table class = "table">
+  <div class = "row md-3">
+    <div>
+      <table class = "table">
           <thead>
             <tr>
               <th>購入日時</th>
@@ -15,21 +13,27 @@
               <th>注文個数</th>
             </tr>
           </thead>
+
           <tbody>
             <% @orders.each do |order| %>
-            <%= link_to "注文を確定する", orders_complete_path(@order), class: "btn btn-success" %>
-      </div>
-          <td><%= link_to "order.created_at" %></td>
+            <tr>
+          <td><%= link_to order.created_at, admin_orders_path(order) %></td>
           <td><%= order.name %></td>
-          <td><%= order.amount %></td>
+          <td>
+          <% order.orders_details.each do |detail| %>
+          <span><%= detail.sum(:amount) %></span>
+          </tr>
+          <% end %>
+          </td>
           <% end %>
           </tbody>
         </table>
       </div>
-    </div>
+      </div>
 
     <div class = "row">
       <div class = "col-4 text-center">
         <%#= paginate @order %>
       </div>
+    </div>
     </div>
