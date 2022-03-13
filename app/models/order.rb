@@ -7,4 +7,11 @@ class Order < ApplicationRecord
   enum select_address: { my_address: 0, registered_address: 1, new_address: 2 }
   validates :total_payment, presence: true
   validates :shipping_cost, presence: true
+  def sum_amount
+    sum = 0
+    self.orders_details.each do |detail|
+      sum += detail.amount
+    end
+    return sum
+  end
 end

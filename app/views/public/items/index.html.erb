@@ -1,13 +1,12 @@
 <div class ="container md-5">
   <div class = "row">
-    <h3><strong>商品一覧</strong></h3>
-    <h5>(全x件)</5>
-  </div>
+    <h3><strong>商品一覧</strong><h5>(全x件)</5></h3>
+    </div>
   <div class = "row">
     <% @items.each do |item| %>
     <div class = "col-md-3">
       <%= link_to item_path(item) do %>
-      <%= attachment_image_tag @item, :image, :fill, 200, 200, fallback: 'no_image.jpeg' %>
+      <%= attachment_image_tag item, :image, size: "200x200", fallback: 'no_image.jpeg' %>
       <% end %>
       <div><%= item.name %></div>
       <div><%= (item.price * 1.1).floor %></div>

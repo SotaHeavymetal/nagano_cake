@@ -6,10 +6,10 @@
 
 <div class = "row mt-3">
  <div class = "offset-sm-1 col-sm-3">
- <%= attachment_image_tag @item, :image, :fill, 200, 200, fallback: 'no_image.jpeg' %>
+ <%= attachment_image_tag @item, :image, size: "200x200", fallback: 'no_image.jpeg' %>
   </div>
   <div class = "col-sm-4">
-<table class = "table">
+<table class = "table-borderless">
   <tbody>
     <tr>
       <td>商品名</td>
@@ -17,10 +17,10 @@
 
       <tr><td>商品説明</td>
       <td><%= @item.introduction %></td></tr>
-      
+
       <tr><td>税込価格（税抜価格）</td>
       <td><%= @item.price %>円</td></tr>
-    
+
   </tbody>
 </table>
 </div>

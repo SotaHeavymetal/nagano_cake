@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root 'homes#top'
-    get '/orders' => 'orders#show'
+    get '/orders/:id' => 'orders#show'
     resources :items, except: [:destroy]
     resources :genres, only: [:index, :create, :edit, :update]
     resources :customers, only: [:index, :show, :edit, :update]

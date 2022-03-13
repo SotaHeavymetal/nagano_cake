@@ -1,31 +1,32 @@
-<div class = "container md-8">
+<div class = "container my-5">
  <div class = "row">
-  <div class = "col-5">
-   <%= attachment_image_tag @item, :image, :fill, 200, 200, fallback: 'no_image.jpeg' %>
+   <div class = "col-6">
+   <%= attachment_image_tag @item, :image, size: "200x200", fallback: 'no_image.jpeg' %>
   </div>
+   <div class = "col-1">
+    <strong><%= @item.name %></strong>
+   </div>
+  </div>
+
   <div class = "row">
-    <div class = "col-lg">
-   <strong><%= @item.name %></strong>
+   <div class = "offset-7 col-5">
+    <%= @item.introduction %>
+   </div>
   </div>
-  </div>
+
   <div class = "row">
-    <div class = "col-md">
-   <%= @item.introduction %>
-  </div>
-  </div>
-  <div class = "row">
-    <div class = "col-md">
+    <div class = "offset-7 col-5">
    ¥<%= @item.price %>円
   </div>
   </div>
 
-  <div class="row offset-1">
-        <div class="row">
-          <%= form_with model: @cart_item, url: cart_items_path do |f| %>
-            <%= f.hidden_field :item_id, :value => @item.id %>
-            <%= f.select :amount, *[1..10] %>
-            <%= f.submit "カートに入れる", class: "btn btn-success" %>
-      　　<% end %>
-        </div>
- </div>
+  <div class = "row">
+   <div class = "offset-7 col-5">
+    <%= form_with model: @cart_item, url: cart_items_path, local: true do |f| %>
+     <%= f.hidden_field :item_id, :value => @item.id %>
+      <%= f.select :amount, *[1..10] %>
+       <%= f.submit "カートに入れる", class: "btn btn-success" %>
+     <% end %>
+    </div>
+  </div>
  </div>
