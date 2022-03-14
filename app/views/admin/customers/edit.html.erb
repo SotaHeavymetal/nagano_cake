@@ -3,8 +3,8 @@
   <h2><%= @customer.first_name %><%= @customer.last_name %>さんの会員情報編集</h2>
  </div>
 
-  <div class = "row mt-3">
-   <div class = "offset-sm-1 col-sm-7">
+  <div class = "row">
+   <div class = "col-12">
     <table class = "table table-borderless">
      <tbody>
       <%= form_with model:@customer, url: admin_customer_path, method: :patch, local:true do |f| %>
@@ -36,13 +36,21 @@
         <td><%= f.label :メールアドレス %></td>
         <td><%= f.email_field :email %></td>
        </tr>
-
+       <tr>
+        <td>会員ステータス<td>
+         <td><%= f.radio_button :is_valid, :true %>
+         <%= f.label :is_valid, "有効" %></td>
+         <td><%= f.radio_button :is_valid, :false %>
+         <%= f.label :is_valid, :退会 %></td>
+       </tr>
       </tbody>
       </div>
       </div>
 </table>
 <div>
-     <%= f.submit "変更を保存", class: "btn btn-success" %>
-     <% end %>
 </div>
+<div class = "row">
+<%= f.submit "変更を保存", class: "btn btn-success" %>
+     <% end %>
+     </div>
     </div>

@@ -44,8 +44,18 @@
             <td><%= @customer.email %></td>
           </tr>
 
-      <td><%=link_to "編集する", edit_admin_customer_path, class: "btn btn-success" %></td>
-      <td><%=link_to "注文履歴一覧を見る", admin_customers_path, class: "btn btn-primary mt-5" %></td>
+          <tr>
+            <td>会員ステータス</td>
+            <td><% if @customer.is_valid == true %>
+              <div class = "text-success">有効</div>
+              <% else %>
+              <div class = "text-muted">退会</div>
+              <% end %>
+              </td></td>
+          </tr>
+
+      <td><%= link_to "編集する", edit_admin_customer_path, class: "btn btn-success" %></td>
+      <td><%= link_to "注文履歴一覧を見る", admin_root_path, class: "btn btn-primary mt-5" %></td>
         </tbody>
       </table>
     </div>

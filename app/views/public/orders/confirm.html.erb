@@ -18,11 +18,11 @@
        </thead>
 
         <% @cart_items.each do |cart_item| %>
-        <% @total += cart_item.subtotal %>
+
          <tbody>
           <tr>
            <td>
-            <%= attachment_image_tag @item, :image, :fill, 200, 200, fallback: 'no_image.jpeg' %>
+            <%= attachment_image_tag cart_item.item, :image, size: "200x200", fallback: 'no_image.jpeg' %>
              <span><%= cart_item.item.name %></span>
            </td>
           　<td><%= cart_item.item.with_tax_price %></td>
@@ -62,7 +62,10 @@
         <table class = "table borderless">
           <tr>
             <td>支払い方法</td>
-            <td><%= @order.payment_method %></td>
+            <td><%= @order.payment_method_i18n %></td>
+            <%#= form_with model: @order, local: true do |f| %>
+            <%#= f.label :@order, Order.payment_methods_i18n[:transfer] %>
+            <%# end %>
           </tr>
           <tr>
          <td>お届け先</td>

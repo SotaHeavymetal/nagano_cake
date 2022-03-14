@@ -16,7 +16,7 @@
        <tbody>
         <tr>
          <td>注文日</td>
-         <td><%= @orders.created_at %></td>
+         <td><%= @orders.created_at.strftime('%Y/%m/%d') %></td>
         </tr>
         <tr>
          <td>配送先</td>
@@ -26,7 +26,7 @@
         </tr>
         <tr>
          <td>支払方法</td>
-         <td><%= @orders.payment_method %></td>
+         <td><%= @orders.payment_method_i18n %></td>
         </tr>
        </tbody>
       </table>
@@ -81,9 +81,9 @@
            <% @orders.orders_details.each do |detail| %>
           <tr>
            <td><%= detail.item.name %></td>
-           <td><%= detail.price %></td>
+           <td><%= (detail.price * 1.1).floor %></td>
             <td><%= detail.amount %></td>
-           <td><%= (detail.price * detail.amount * 1.1).floor %></td>
+           <td><%= (detail.price * 1.1).floor * detail.amount %></td>
           </tr>
          </tbody>
         <% end %>

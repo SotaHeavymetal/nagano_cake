@@ -3,8 +3,8 @@
     <h2>注文履歴一覧</h2>
   </div>
 
-  <div class = "row md-3">
-    <div>
+  <div class = "row mt-3">
+    <div class = "offset-sm-1 col-sm-10">
       <table class = "table">
           <thead>
             <tr>
@@ -17,14 +17,17 @@
           <tbody>
             <% @orders.each do |order| %>
             <tr>
-          <td><%= link_to order.created_at, admin_orders_path(order) %></td>
+          <td><%= link_to order.created_at.strftime('%Y/%m/%d'), admin_path(order) %></td>
           <td><%= order.name %></td>
           <td>
+            <% sum = 0 %>
           <% order.orders_details.each do |detail| %>
-          <span><%= detail.sum(:amount) %></span>
-          </tr>
+          <% sum += detail.amount %>
           <% end %>
+          <%= sum %>
+          <%#= order.sum_amount %>
           </td>
+          </tr>
           <% end %>
           </tbody>
         </table>
@@ -33,7 +36,7 @@
 
     <div class = "row">
       <div class = "col-4 text-center">
-        <%#= paginate @order %>
+        <%= paginate @orders %>
       </div>
     </div>
     </div>
