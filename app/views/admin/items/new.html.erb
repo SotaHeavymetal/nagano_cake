@@ -20,8 +20,16 @@
       <td><%= f.text_area :introduction %></td>
      </tr>
      <tr>
+      <td><%= f.label :ジャンル %></td>
+      <td><%= f.collection_select :genre_id, Genre.all, :id :name %></td>
+     </tr>
+     <tr>
       <td><%= f.label :税抜価格 %></td>
       <td><%= f.text_field :price %></td>
+     </tr>
+     <tr>
+      <td><%= f.label :販売ステータス %></td>
+      <td><% %></td>
      </tr>
     </table>
 
