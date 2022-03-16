@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   end
 
   scope module: :public do
+    get 'search' => 'items#search'
     root 'homes#top'
     get '/about'=>'homes#about'
     get '/thanks'=>'homes#thanks'

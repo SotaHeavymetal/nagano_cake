@@ -10,6 +10,12 @@ class Public::ItemsController < ApplicationController
     @cart_item = CartItem.new
   end
 
+  def search
+   @items = Item.search(params[:keyword])
+   @keyword = params[:keyword]
+  render "index"
+  end
+
     private
      def item_params
       params.require(:cart_item).permit(:customer_id, :item_id, :amount)

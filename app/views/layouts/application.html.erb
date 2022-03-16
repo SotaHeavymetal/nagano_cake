@@ -64,16 +64,19 @@
     </div>
     </div>
     </nav>
+    <div class="search-form">
+  <%= form_with url: search_path, method: :get, local: true do |f| %>
+    <%= f.text_field :keyword, value: @keyword %>
+    <%= f.submit "検索" %>
+  <% end %>
+</div>
+<div class="post-list">
+  <% @items.each do |item| %>
+    <%= item.name %>
+  <% end %>
+</div>
     </header>
       <%= yield %>
-
-     <!--<footer>-->
-     <!-- <div class="border-top" style="padding:45px;">おいしいケーキ屋さん。-->
-     <!--  <div class="container">-->
-     <!--   <div class = "row">-->
-     <!--   </div>-->
-     <!--  </div>-->
-     <!-- </div>-->
-     <!--</footer>-->
     </body>
+
 </html>

@@ -3,14 +3,12 @@
     <h3><strong>商品一覧</strong><h5>(全x件)</5></h3>
     </div>
   <div class = "row">
-    <% @items.each do |item| %>
     <div class = "col-md-3">
-      <%= link_to item_path(item) do %>
+      <%= @items.each do |item| %>
       <%= attachment_image_tag item, :image, size: "200x200", fallback: 'no_image.jpeg' %>
-      <% end %>
       <div><%= item.name %></div>
       <div><%= (item.price * 1.1).floor %></div>
+      <% end %>
     </div>
-     <% end %>
-     <%= paginate @items %>
+     <%#= paginate @items %>
   </div>
