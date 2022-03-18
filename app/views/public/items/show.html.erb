@@ -1,5 +1,9 @@
 <div class = "container my-5">
  <div class = "row">
+   <div class = "col-3">
+      <%= render 'genresearch', genres: @genres %>
+    </div>
+    
    <div class = "col-6">
    <%= attachment_image_tag @item, :image, size: "200x200", fallback: 'no_image.jpeg' %>
   </div>

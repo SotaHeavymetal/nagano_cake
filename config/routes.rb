@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     root 'homes#top'
     get '/about'=>'homes#about'
     get '/thanks'=>'homes#thanks'
+    resources :genres, only: [:show]
     resources :items, only: [:index, :show]
     get 'customers/my_page' => 'customers#show', as: :mypage
     get 'customers/unsubscribe'=>'customers#unsubscribe'
